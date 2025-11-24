@@ -20,6 +20,7 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: padding 0.3s ease, box-shadow 0.3s ease; /* Smooth shrinking effect */
+            position: relative; /* Added for positioning menu button */
         }
         header.shrink {
             padding: 0.5rem; /* Smaller padding when scrolling */
@@ -82,52 +83,49 @@
             right: 0;
             display: flex;
             flex-direction: row; /* Changed to row for horizontal layout */
-            gap: 0.5rem; /* Adjusted spacing between buttons */
+            gap: 1rem; /* Adjusted spacing between links */
             justify-content: center; /* Center buttons horizontally */
             margin-top: 0.5rem; /* Add spacing below the logo */
         }
         .contact-buttons a {
             text-decoration: none;
-            background: linear-gradient(45deg, #0073e6, #005bb5); /* Gradient background */
-            color: white;
-            padding: 0.75rem 1.5rem; /* Increased padding for larger buttons */
-            border-radius: 8px; /* Slightly more rounded corners */
+            color: white; /* Keep the text white to match the header */
             font-size: 1.1rem; /* Increased font size */
             font-weight: bold; /* Make text bold */
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow for emphasis */
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Added transform effect */
-            display: flex;
-            align-items: center;
-            gap: 0.5rem; /* Space between icon and text */
-            overflow: hidden; /* Ensure ripple effect stays within button bounds */
-            position: relative;
         }
         .contact-buttons a:hover {
-            background: linear-gradient(45deg, #005bb5, #003f7f); /* Darker gradient on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+            text-decoration: underline; /* Add underline on hover for clarity */
         }
-        .contact-buttons a i {
-            font-size: 1.2rem; /* Icon size */
-        }
-        .contact-buttons a::after {
-            content: "";
+        .menu-button {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000; /* Ensure it stays above other elements */
+            transition: opacity 0.3s ease; /* Smooth fade-out effect */
         }
-        .contact-buttons a:active::after {
-            width: 200%;
-            height: 200%;
-            opacity: 0;
+        .menu-button.hidden {
+            opacity: 0; /* Make the button invisible */
+            pointer-events: none; /* Disable interaction */
+        }
+        .menu-button span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: white;
+            border-radius: 2px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .menu-button:hover span {
+            background-color: #ffcc00; /* Highlight color on hover */
         }
         footer {
             background-color: #002244; /* Dark navy blue */
@@ -136,6 +134,30 @@
             padding: 1rem;
             position: static; /* Changed from fixed to static */
             width: 100%;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Hidden off-screen initially */
+            width: 300px;
+            height: 100%;
+            background-color: white; /* Blank white panel */
+            box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease; /* Smooth slide-in effect */
+            z-index: 999; /* Ensure it appears above other elements */
+            padding: 1rem;
+        }
+        .side-panel.open {
+            right: 0; /* Slide into view */
+        }
+        .side-panel .close-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -148,6 +170,22 @@
                 header.classList.remove('shrink');
             }
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.querySelector('.menu-button');
+            const sidePanel = document.querySelector('.side-panel');
+            const closeButton = document.querySelector('.side-panel .close-button');
+
+            menuButton.addEventListener('click', () => {
+                sidePanel.classList.add('open'); // Open the panel
+                menuButton.classList.add('hidden'); // Hide the menu button
+            });
+
+            closeButton.addEventListener('click', () => {
+                sidePanel.classList.remove('open'); // Close the panel
+                menuButton.classList.remove('hidden'); // Show the menu button
+            });
+        });
     </script>
 </head>
 <body>
@@ -155,17 +193,19 @@
         <img src="Clear_path_snow_logo.png" alt="Clear Paths Snow Removal Logo" class="logo">
         <p class="header-info">Side walks and driveways.<br>Wilton, Greenwich, New York area for snow removal</p>
         <div class="contact-buttons">
-            <a href="tel:6562274777">
-                <i class="fas fa-phone"></i> Call: 656-227-4777
-            </a>
-            <a href="sms:6562274777">
-                <i class="fas fa-sms"></i> Text: 656-227-4777
-            </a>
-            <a href="mailto:clearpathssnowservice@gmail.com">
-                <i class="fas fa-envelope"></i> Email Us
-            </a>
+            <a href="tel:6562274777">Call: 656-227-4777</a>
+            <a href="sms:6562274777">Text: 656-227-4777</a>
+            <a href="mailto:clearpathssnowservice@gmail.com">Email Us</a>
         </div>
+        <button class="menu-button" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
+    <div class="side-panel">
+        <button class="close-button" aria-label="Close">&times;</button>
+    </div>
     <main>
         <!-- Pricing Section -->
         <section class="pricing">
