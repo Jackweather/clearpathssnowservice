@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Clear Paths Snow Removal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            background-image: url('https://www.transparenttextures.com/patterns/snow.png');
+            background-repeat: repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+        }
+        header {
+            background-color: #005f99;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .logo {
+            max-width: 350px;
+            margin: 1rem auto;
+            display: block;
+        }
+        .header-info {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .contact-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .contact-buttons a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .contact-buttons a:hover {
+            text-decoration: underline;
+        }
+        .menu-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .menu-button span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: white;
+            border-radius: 2px;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 1rem;
+        }
+        .side-panel.open {
+            right: 0;
+        }
+        .side-panel .close-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .side-panel nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .side-panel nav ul li {
+            margin: 1rem 0;
+        }
+        .side-panel nav ul li a {
+            text-decoration: none;
+            color: #005f99;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .side-panel nav ul li a:hover {
+            color: #003f7f;
+        }
+        main {
+            flex: 1; /* Push the footer to the bottom */
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        h1 {
+            color: #005f99;
+        }
+        footer {
+            background-color: #002244;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #005f99;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .cta:hover {
+            background: #003f7f;
+        }
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .payment-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .payment-card h3 {
+            margin-top: 0;
+            color: #005f99;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.querySelector('.menu-button');
+            const sidePanel = document.querySelector('.side-panel');
+            const closeButton = document.querySelector('.side-panel .close-button');
+
+            menuButton.addEventListener('click', () => {
+                sidePanel.classList.add('open'); // Open the panel
+            });
+
+            closeButton.addEventListener('click', () => {
+                sidePanel.classList.remove('open'); // Close the panel
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="Clear_path_snow_logo.png" alt="Clear Paths Snow Removal Logo" class="logo">
+        <p class="header-info">Side walks and driveways.<br>Wilton, Greenwich, New York area for snow removal</p>
+        <div class="contact-buttons">
+            <a href="tel:6562274777">Call: 656-227-4777</a>
+            <a href="sms:6562274777">Text: 656-227-4777</a>
+            <a href="mailto:clearpathssnowservice@gmail.com">Email Us</a>
+        </div>
+        <button class="menu-button" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+    <div class="side-panel">
+        <button class="close-button" aria-label="Close">&times;</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <h2>Payment</h2>
+        <p>We offer multiple payment options to make it convenient for you. Choose the method that works best for you:</p>
+        <div class="payment-options">
+            <div class="payment-card">
+                <h3>Cash</h3>
+                <p>Pay directly in person.</p>
+            </div>
+            <div class="payment-card">
+                <h3>Venmo</h3>
+                <p>Send your payment to <strong>@ClearPathsSnow</strong>.</p>
+            </div>
+            <div class="payment-card">
+                <h3>Cash App</h3>
+                <p>Send your payment to <strong>$ClearPathsSnow</strong>.</p>
+            </div>
+            <div class="payment-card">
+                <h3>Check</h3>
+                <p>Make checks payable to <strong>Clear Paths Snow Removal</strong>.</p>
+            </div>
+            <div class="payment-card">
+                <h3>And More</h3>
+                <p>We also accept other payment methods. Contact us for details!</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Clear Paths Snow Removal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
