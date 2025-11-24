@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Clear Paths Snow Removal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            background-image: url('https://www.transparenttextures.com/patterns/snow.png');
+            background-repeat: repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+        }
+        header {
+            background-color: #005f99;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .logo {
+            max-width: 350px;
+            margin: 1rem auto;
+            display: block;
+        }
+        .header-info {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .contact-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        .contact-buttons a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .contact-buttons a:hover {
+            text-decoration: underline;
+        }
+        .menu-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        .menu-button span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: white;
+            border-radius: 2px;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 1rem;
+        }
+        .side-panel.open {
+            right: 0;
+        }
+        .side-panel .close-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .side-panel nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .side-panel nav ul li {
+            margin: 1rem 0;
+        }
+        .side-panel nav ul li a {
+            text-decoration: none;
+            color: #005f99;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .side-panel nav ul li a:hover {
+            color: #003f7f;
+        }
+        main {
+            flex: 1; /* Push the footer to the bottom */
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        h1 {
+            color: #005f99;
+        }
+        footer {
+            background-color: #002244;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .contact-me-link {
+            color: #005f99;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .contact-me-link:hover {
+            color: #003f7f;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Above other elements */
+        }
+        .modal.open {
+            display: flex; /* Show the modal */
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+        }
+        .modal-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #005f99;
+        }
+        .modal-content .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .modal-content .options a {
+            text-decoration: none;
+            background: #005f99;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .modal-content .options a:hover {
+            background: #003f7f;
+        }
+        .modal-content .close-modal {
+            margin-top: 1.5rem;
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .modal-content .close-modal:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.querySelector('.menu-button');
+            const sidePanel = document.querySelector('.side-panel');
+            const closeButton = document.querySelector('.side-panel .close-button');
+            const contactMeLink = document.querySelector('.contact-me-link');
+            const modal = document.querySelector('.modal');
+            const closeModalButton = document.querySelector('.close-modal');
+
+            menuButton.addEventListener('click', () => {
+                sidePanel.classList.add('open'); // Open the panel
+            });
+
+            closeButton.addEventListener('click', () => {
+                sidePanel.classList.remove('open'); // Close the panel
+            });
+
+            // Open the modal when "Contact Me" text is clicked
+            contactMeLink.addEventListener('click', () => {
+                modal.classList.add('open');
+            });
+
+            // Close the modal when the close button is clicked
+            closeModalButton.addEventListener('click', () => {
+                modal.classList.remove('open');
+            });
+
+            // Close the modal when clicking outside the modal content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="Clear_path_snow_logo.png" alt="Clear Paths Snow Removal Logo" class="logo">
+        <p class="header-info">Side walks and driveways.<br>Wilton, Greenwich, New York area for snow removal</p>
+        <div class="contact-buttons">
+            <a href="tel:6562274777">Call: 656-227-4777</a>
+            <a href="sms:6562274777">Text: 656-227-4777</a>
+            <a href="mailto:clearpathssnowservice@gmail.com">Email Us</a>
+        </div>
+        <button class="menu-button" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+    <div class="side-panel">
+        <button class="close-button" aria-label="Close">&times;</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <h2>Welcome to Clear Paths Snow Removal</h2>
+        <p>Clear Paths Snow Removal is a one-person operation offering snow removal services in the Wilton, Greenwich, and New York areas. I clear sidewalks, driveways, and other paths to ensure they are safe and accessible during the winter months.</p>
+        <p>Contact me today to schedule your snow removal service! <span class="contact-me-link">Click here to contact me</span>.</p>
+    </main>
+    <div class="modal">
+        <div class="modal-content">
+            <h3>Contact Me</h3>
+            <div class="options">
+                <a href="mailto:clearpathssnowservice@gmail.com">Email Me</a>
+                <a href="sms:6562274777">Send a Text</a>
+                <a href="tel:6562274777">Call Me</a>
+            </div>
+            <button class="close-modal">Close</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Clear Paths Snow Removal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
